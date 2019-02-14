@@ -56,13 +56,14 @@ countVocab = len(vocab)
 numDocs = len(allDocs)
 docCount = Counter(allDocs)
 
-# calculate probabilities and word counts of each doc type
+# calculate probabilities, word counts, and word probabilities for each doc type
 for doc in docTypes:
     docProbabilities[doc] = docCount[doc] / numDocs
     docWordCount[doc] = len(docCombined[doc]) + countVocab
     wordcount = Counter(docCombined[doc])
     for w in wordcount:
         docWordProb[doc][w] = (wordcount[w] + 1) / docWordCount[doc]
+    # TODO create dictionary of minimum probabilities to reference in classifying step
 
 print(docWordProb["atheism"])
 

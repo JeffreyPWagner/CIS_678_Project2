@@ -85,7 +85,7 @@ for doc in docTypes:
     for w in wordcount:
         docWordProb[doc][w] = (wordcount[w] + 1) / docWordCount[doc]
 
-mostCommon = [word for word, word_count in Counter(allWords).most_common(4000)]
+mostCommon = [word for word, word_count in Counter(allWords).most_common(int(len(vocab) * .002))]
 
 testFile = open(r"C:\Users\jeffp\OneDrive\Documents\GitHub\CIS_678_Project2\forumTest.data", "r")
 
@@ -93,8 +93,9 @@ for row in testFile:
     words = row.split()
     testTypes.append(words[0])
     del words[0]
-    wordsMod = [x for x in words if x not in mostCommon]
+    wordsMod = [word for word in words if word not in mostCommon]
     maxProb = -999999999
+    # TODO set to min
     guessClass = label
     for doc in docTypes:
         prob = math.log(docProbabilities[doc])
@@ -113,3 +114,5 @@ for i, val in enumerate(testTypes):
         correctCount += 1
 
 print(correctCount / len(testGuesses))
+# TODO email prof to see if additional test sets are available to test for overtraining
+# TODO try additional steps in assignment

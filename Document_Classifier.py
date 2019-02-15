@@ -44,6 +44,12 @@ testTypes = []
 # list of assigned classes
 testGuesses = []
 
+# label for training classes
+label = ""
+
+# count of correct class assignments
+correctCount = 0
+
 # open and read training file
 trainingFile = open(r"C:\Users\jeffp\OneDrive\Documents\GitHub\CIS_678_Project2\forumTraining.data", "r")
 
@@ -88,8 +94,8 @@ for row in testFile:
     testTypes.append(words[0])
     del words[0]
     wordsMod = [x for x in words if x not in mostCommon]
-    maxProb = -1
-    guessClass = "atheism"
+    maxProb = -999999999
+    guessClass = label
     for doc in docTypes:
         prob = math.log(docProbabilities[doc])
         for word in wordsMod:
@@ -97,18 +103,13 @@ for row in testFile:
                 prob += math.log(docWordProb[doc][word])
             else:
                 prob += math.log(docMinProb[doc])
-        prob = math.exp(prob)
         if prob > maxProb:
             maxProb = prob
             guessClass = doc
     testGuesses.append(guessClass)
 
-i = 0
-correctCount = 0
-while i < len(testGuesses):
-    if testGuesses[i] == testTypes[i]:
+for i, val in enumerate(testTypes):
+    if testGuesses[i] == val:
         correctCount += 1
-    i += 1
-
 
 print(correctCount / len(testGuesses))

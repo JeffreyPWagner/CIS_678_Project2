@@ -1,8 +1,12 @@
 import collections
+import math
 from collections import Counter
 
 # set of all words in docs
 vocab = set()
+
+# list of all words
+allWords = []
 
 # count of words in vocab
 countVocab = 0
@@ -25,11 +29,20 @@ docCombined = {}
 # dictionary of word counts for each doc type plus count of words in vocab
 docWordCount = {}
 
-# dictionary of list of word probabilities for each doc type
+# dictionary of dictionaries of word probabilities for each doc type
 docWordProb = collections.defaultdict(dict)
+
+# dictionary of minimum word probabilities for each doc type
+docMinProb = {}
 
 # total number of documents
 numDocs = 0
+
+# list of test doc types
+testTypes = []
+
+# list of assigned classes
+testGuesses = []
 
 # open and read training file
 trainingFile = open(r"C:\Users\jeffp\OneDrive\Documents\GitHub\CIS_678_Project2\forumTraining.data", "r")
@@ -45,6 +58,7 @@ for row in trainingFile:
     else:
         docCombined[label] = words
     del words[0]
+    allWords += words
     for w in words:
         vocab.add(w)
 trainingFile.close()
@@ -61,10 +75,40 @@ for doc in docTypes:
     docProbabilities[doc] = docCount[doc] / numDocs
     docWordCount[doc] = len(docCombined[doc]) + countVocab
     wordcount = Counter(docCombined[doc])
+    docMinProb[doc] = 1 / docWordCount[doc]
     for w in wordcount:
         docWordProb[doc][w] = (wordcount[w] + 1) / docWordCount[doc]
-    # TODO create dictionary of minimum probabilities to reference in classifying step
 
-print(docWordProb["atheism"])
+mostCommon = [word for word, word_count in Counter(allWords).most_common(4000)]
+
+testFile = open(r"C:\Users\jeffp\OneDrive\Documents\GitHub\CIS_678_Project2\forumTest.data", "r")
+
+for row in testFile:
+    words = row.split()
+    testTypes.append(words[0])
+    del words[0]
+    wordsMod = [x for x in words if x not in mostCommon]
+    maxProb = -1
+    guessClass = "atheism"
+    for doc in docTypes:
+        prob = math.log(docProbabilities[doc])
+        for word in wordsMod:
+            if word in docWordProb[doc].keys():
+                prob += math.log(docWordProb[doc][word])
+            else:
+                prob += math.log(docMinProb[doc])
+        prob = math.exp(prob)
+        if prob > maxProb:
+            maxProb = prob
+            guessClass = doc
+    testGuesses.append(guessClass)
+
+i = 0
+correctCount = 0
+while i < len(testGuesses):
+    if testGuesses[i] == testTypes[i]:
+        correctCount += 1
+    i += 1
 
 
+print(correctCount / len(testGuesses))

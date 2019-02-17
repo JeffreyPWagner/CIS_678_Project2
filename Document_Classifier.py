@@ -1,6 +1,7 @@
 import collections
 import math
 from collections import Counter
+from nltk.stem import PorterStemmer
 
 
 def naiveBayes (exclusionRate):
@@ -20,7 +21,7 @@ def naiveBayes (exclusionRate):
     docTypes = set()
 
     # dictionary of count of each doc type
-    docCount = {}
+    docCou1nt = {}
 
     # dictionary of probabilities of each doc type
     docProbabilities = {}
@@ -55,19 +56,22 @@ def naiveBayes (exclusionRate):
     # open and read training file
     trainingFile = open(r"C:\Users\jeffp\OneDrive\Documents\GitHub\CIS_678_Project2\forumTraining.data", "r")
 
+    ps = PorterStemmer()
+
     # read data from training file and close
     for row in trainingFile:
         words = row.split()
         label = words[0]
+        wordsModTrain = words
         allDocs.append(label)
         docTypes.add(label)
         if label in docCombined.keys():
-            docCombined[label] += words
+            docCombined[label] += wordsModTrain
         else:
-            docCombined[label] = words
-        del words[0]
-        allWords += words
-        for w in words:
+            docCombined[label] = wordsModTrain
+        del wordsModTrain[0]
+        allWords += wordsModTrain
+        for w in wordsModTrain:
             vocab.add(w)
     trainingFile.close()
 
@@ -96,13 +100,13 @@ def naiveBayes (exclusionRate):
         testTypes.append(words[0])
         del words[0]
         wordsMod = [word for word in words if word not in mostCommon]
-        wordsMod2 = [word for word in wordsMod if len(word) > 1]
+        # wordsMod2 = [word for word in wordsMod if len(word) > 1]
         maxProb = -999999999
         # TODO set to min
         guessClass = label
         for doc in docTypes:
             prob = math.log(docProbabilities[doc])
-            for word in wordsMod2:
+            for word in wordsMod:
                 if word in docWordProb[doc].keys():
                     prob += math.log(docWordProb[doc][word])
                 else:
@@ -120,17 +124,17 @@ def naiveBayes (exclusionRate):
 
 
 def findOptimalExclusion():
-    exclusionRate = 0.001
+    exclusionRate = 0.0002
     maxAccuracy = -1
-    while exclusionRate < 0.003:
+    while exclusionRate < 0.01:
         accuracy = naiveBayes(exclusionRate)
         print(exclusionRate)
         exclusionRate += 0.0002
 
 
 findOptimalExclusion()
-# TODO email prof to see if additional test sets are available to test for overtraining
-# TODO try additional steps in assignment
 # TODO write resulting lists to file
-# TODO refactor into function that find optimal common word exclusion
 # TODO potentially plot exclusion rates vs accuracy
+# TODO add other accuracy metrics
+# TODO clean up and remove unused
+# TODO possibly refactor to return classification

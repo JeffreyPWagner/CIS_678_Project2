@@ -156,11 +156,10 @@ def naiveBayes(exclusionRate):
 
 # finds the optimal n% (between .1% and 1%) most common words to exclude for highest correct rate
 def findOptimalExclusion():
-    exclusionRate = 0.002
+    exclusionRate = 0.000
     maxAccuracy = -1
     optimalExclusion = exclusionRate
-    while exclusionRate < 0.003:
-        # TODO change to 1 and .1%
+    while exclusionRate < 0.011:
         accuracy = naiveBayes(exclusionRate)
         if accuracy > maxAccuracy:
             maxAccuracy = accuracy
@@ -208,5 +207,4 @@ with open("results.txt", 'w') as f:
         f.write(val + ' ' + testGuesses[i] + '\n')
     f.close()
 
-# TODO complete writeup
 

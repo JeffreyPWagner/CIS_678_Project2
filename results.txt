@@ -2,7 +2,9 @@ Recall: '82.15%'
 Precision: '83.29%'
 F1: '41.36%'
 Misclassification Rate: '16.99%'
+
 Classes Guesses 
+
 atheism atheism
 atheism atheism
 atheism atheism

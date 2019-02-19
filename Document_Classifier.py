@@ -195,16 +195,14 @@ print('Misclassification Rate: %r' % "{:.2%}".format(misclassificationRate))
 cmDataFrame = pd.DataFrame(cm, index=docTypesList, columns=docTypesList)
 print(cmDataFrame)
 
-# write results to file
+# write results to files
 cmDataFrame.to_csv('confusionMatrix.csv')
 with open("results.txt", 'w') as f:
     f.write('Recall: %r' % "{:.2%}".format(meanRecall) + '\n')
     f.write('Precision: %r' % "{:.2%}".format(meanPrecision) + '\n')
     f.write('F1: %r' % "{:.2%}".format(f1) + '\n')
-    f.write('Misclassification Rate: %r' % "{:.2%}".format(misclassificationRate) + '\n')
-    f.write('Classes Guesses \n')
+    f.write('Misclassification Rate: %r' % "{:.2%}".format(misclassificationRate) + '\n\n')
+    f.write('Classes Guesses \n\n')
     for i, val in enumerate(testAnswers):
         f.write(val + ' ' + testGuesses[i] + '\n')
     f.close()
-
-

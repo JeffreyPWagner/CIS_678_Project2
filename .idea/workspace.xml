@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc08bdba-3962-415f-a368-7f6fded4b389" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/confusionMatrix.csv" beforeDir="false" afterPath="$PROJECT_DIR$/confusionMatrix.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Document_Classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/Document_Classifier.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/Document_Classifier.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="773">
-              <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
+              <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -141,11 +141,12 @@
       <workItem from="1550505882762" duration="238000" />
       <workItem from="1550506202976" duration="2230000" />
       <workItem from="1550537745007" duration="3039000" />
+      <workItem from="1552238118510" duration="767000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48977000" />
+    <option name="totallyTimeSpent" value="49744000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -199,7 +200,7 @@
     <entry file="file://$PROJECT_DIR$/Document_Classifier.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="773">
-          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
+          <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

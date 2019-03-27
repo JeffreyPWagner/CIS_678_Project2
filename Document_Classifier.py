@@ -206,3 +206,4 @@ with open("results.txt", 'w') as f:
     for i, val in enumerate(testAnswers):
         f.write(val + ' ' + testGuesses[i] + '\n')
     f.close()
+
